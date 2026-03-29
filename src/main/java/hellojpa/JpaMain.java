@@ -30,25 +30,26 @@ public class JpaMain {
 //            }
 
             //비 영속 상태
-            Member member = new Member();
-            member.setId(4L);
-            member.setName("HelloJpa");
+//            Member member = new Member();
+//            member.setId(5L);
+//            member.setName("HelloJpa");
+//            member.setAge(17);
 
             //영속 상태
             //객체가 영속성 컨텍스트에 들어가서 관리됨
 //            System.out.println("=== BEFORE ===");
 //            em.persist(member);
 //            System.out.println("=== After ===");
-
-            Member find = em.find(Member.class, 4L);
-            Member find2 = em.find(Member.class, 4L);
-            //영속성 컨텍스트에 객체가 없는경우 db에서 조회한 뒤 영속성 컨텍스트에 저장
-            System.out.println(find.getName());
-            //영속성 컨텍스트에 있는 경우 그것을 가져옴(1차 캐시)
-            System.out.println(find2.getName());
-            //영속 엔티티의 동일성 보장
-            System.out.println(find == find2);
-            tx.commit();
+//
+//            Member find = em.find(Member.class, 4L);
+//            Member find2 = em.find(Member.class, 4L);
+//            //영속성 컨텍스트에 객체가 없는경우 db에서 조회한 뒤 영속성 컨텍스트에 저장
+//            System.out.println(find.getName());
+//            //영속성 컨텍스트에 있는 경우 그것을 가져옴(1차 캐시)
+//            System.out.println(find2.getName());
+//            //영속 엔티티의 동일성 보장
+//            System.out.println(find == find2);
+//            tx.commit();
         } catch (Exception e) {
             tx.rollback();
         } finally {

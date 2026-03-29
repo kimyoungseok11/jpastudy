@@ -1,27 +1,36 @@
 package hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 public class Member {
+
     @Id
     private Long id;
-    private String name;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "name", nullable = false, columnDefinition = "varchar(100) default 'EMPTY'")
+    private String username;
 
-    public String getName() {
-        return name;
-    }
+    private BigDecimal age;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    //enum을 사용할 경우
+    //EnumType.STRING으로 무조건 사용
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public void setId(Long id) {
-        this.id = id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
+
+    //varchar보다 긴 경우
+    @Lob
+    private String description;
+
+    public Member() {
+
     }
 }
