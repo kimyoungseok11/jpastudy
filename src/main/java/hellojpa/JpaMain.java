@@ -30,14 +30,14 @@ public class JpaMain {
 //            }
 
             //비 영속 상태
-            Member member = new Member();
+            //Member member = new Member();
 //            member.setId("ID_A");
-            member.setUsername("c");
+//            member.setUsername("c");
 
             //영속 상태
             //객체가 영속성 컨텍스트에 들어가서 관리됨
 //            System.out.println("=== BEFORE ===");
-            em.persist(member);
+            //em.persist(member);
 //            System.out.println("=== After ===");
 //
 //            Member find = em.find(Member.class, 4L);
@@ -48,6 +48,10 @@ public class JpaMain {
 //            System.out.println(find2.getName());
 //            //영속 엔티티의 동일성 보장
 //            System.out.println(find == find2);
+
+            Order order = new Order();
+            order.addOrderItems(new OrderItem());
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

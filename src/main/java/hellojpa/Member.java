@@ -2,91 +2,69 @@ package hellojpa;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Member {
-
     @Id
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String username;
+    @Column
+    private String name;
 
-    private BigDecimal age;
+    @Column
+    private String city;
 
-    //enum을 사용할 경우
-    //EnumType.STRING으로 무조건 사용
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    @Column
+    private String street;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    @Column
+    private String zipCode;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    //varchar보다 긴 경우
-    @Lob
-    private String description;
-
-    public Member() {
-
-    }
+    @OneToMany(mappedBy = "member")
+    private List<Order> orderList = new ArrayList<>();
 
     public Long getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public BigDecimal getAge() {
-        return age;
+    public String getCity() {
+        return city;
     }
 
-    public RoleType getRoleType() {
-        return roleType;
+    public String getStreet() {
+        return street;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public String getDescription() {
-        return description;
+    public String getZipCode() {
+        return zipCode;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setAge(BigDecimal age) {
-        this.age = age;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 }
