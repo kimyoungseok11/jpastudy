@@ -28,6 +28,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Order> orderList = new ArrayList<>();
 
+    @OneToOne()
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
     public Long getId() {
         return id;
     }
