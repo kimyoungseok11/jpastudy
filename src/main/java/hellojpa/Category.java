@@ -16,7 +16,6 @@ public class Category {
     private String name;
 
     @ManyToOne
-    @Column(name = "PARENT_ID")
     @JoinColumn(name = "PARENT_ID")
     private Category parent;
 
@@ -24,5 +23,6 @@ public class Category {
     private List<Category> child = new ArrayList<>();
 
     @ManyToMany
+    @JoinColumn(name = "ITEM_ID")
     private List<Item> items = new ArrayList<>();
 }

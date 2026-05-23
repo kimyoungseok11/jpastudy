@@ -25,12 +25,12 @@ public class Member {
     @Column
     private String zipCode;
 
-    @OneToMany(mappedBy = "member")
-    private List<Order> orderList = new ArrayList<>();
-
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> orderList = new ArrayList<>();
 
     public Long getId() {
         return id;

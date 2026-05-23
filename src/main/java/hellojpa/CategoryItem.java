@@ -11,9 +11,9 @@ public class CategoryItem {
 
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
-    private long categoryId;
+    private Category category;
 
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
-    private long itemId;
+    private Item item;
 }
