@@ -1,5 +1,7 @@
 package hellojpa;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Getter
 public class Member {
     @Id
     @GeneratedValue
@@ -25,12 +28,12 @@ public class Member {
     @Column
     private String zipCode;
 
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
-
     @OneToMany(mappedBy = "member")
     private List<Order> orderList = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     public Long getId() {
         return id;
@@ -70,5 +73,10 @@ public class Member {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMember().add(this);
     }
 }

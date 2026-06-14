@@ -7,7 +7,17 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public class JpaMain {
+    private static void printMemberAndTeam(Member member) {
+        String userName = member.getName();
+        System.out.println("username = " + userName);
 
+        Team team = member.getTeam();
+        System.out.println("team = " + team);
+    }
+    private static void printMember(Member member) {
+        String userName = member.getName();
+        System.out.println("username = " + userName);
+    }
     //모든 jpa 변경은 트랜잭션 안에서 실행헤야함
     public static void main(String[] args) {
         EntityManagerFactory emf =
@@ -18,6 +28,21 @@ public class JpaMain {
 
         //이 사이에 code를 작성
         try {
+            Member member = new Member();
+            member.setName("hello");
+
+            Member member2 = new Member();
+            member2.setName("hello2");
+
+            em.persist(member);
+            em.persist(member2);
+            em.flush();
+
+            Member refMember = em.getReference(Member.class, member.getId());
+            System.out.println("refMember = " + refMember.getClass());
+
+            System.out.println(emf.getPersistenceUnitUtil().isLoaded(refMember));
+
 //            Member findMember = em.find(Member.class, 1L);
 //            List<Member> findMembers =
 //                    em.createQuery("SELECT m from Member as m",Member.class)
@@ -49,12 +74,10 @@ public class JpaMain {
 //            //영속 엔티티의 동일성 보장
 //            System.out.println(find == find2);
 
-            Order order = new Order();
-            order.addOrderItems(new OrderItem());
-
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
+            e.printStackTrace();
         } finally {
             em.close();
         }

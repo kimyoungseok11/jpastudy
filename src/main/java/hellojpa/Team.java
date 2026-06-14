@@ -1,10 +1,13 @@
 package hellojpa;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class Team {
 
     @Id
@@ -16,6 +19,9 @@ public class Team {
 
 //    @OneToMany(mappedBy = "team")
 //    private List<Member> members = new ArrayList<>();
+
+    @OneToMany(mappedBy = "team")
+    private List<Member> member = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -31,6 +37,10 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setMemberAndTeam() {
+
     }
 
 //    public List<Member> getMembers() {
