@@ -1,9 +1,6 @@
 package hellojpa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 public class JpaMain {
@@ -28,20 +25,27 @@ public class JpaMain {
 
         //이 사이에 code를 작성
         try {
-            Member member = new Member();
-            member.setName("hello");
+            Parent parent = new Parent();
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Member member2 = new Member();
-            member2.setName("hello2");
+            parent.addChild(child1);
+            parent.addChild(child2);
 
-            em.persist(member);
-            em.persist(member2);
+            em.persist(parent);
+
             em.flush();
+            em.clear();
 
-            Member refMember = em.getReference(Member.class, member.getId());
-            System.out.println("refMember = " + refMember.getClass());
+            Parent findParents = em.find(Parent.class, parent.getId());
+            findParents.getChildList().remove(0);
 
-            System.out.println(emf.getPersistenceUnitUtil().isLoaded(refMember));
+            List<Member> result = em.createQuery("select m from Member m join fetch m.team", Member.class).getResultList();
+
+
+
+//            Member refMember = em.find(Member.class, member.getId());
+//            System.out.println("refMember = " + refMember.getTeam().getName());
 
 //            Member findMember = em.find(Member.class, 1L);
 //            List<Member> findMembers =
